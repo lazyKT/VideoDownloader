@@ -1,5 +1,5 @@
 # VideoDownloader
-Download the videos from YouTube or any sources
+Download the videos from YouTube
 
 **Current only YouTube videos can be downloaded**
 
