@@ -1,4 +1,5 @@
 from pytube import YouTube
+import urllib2
 import os
 
 def checkLocation(save_dest):
@@ -11,6 +12,10 @@ def checkLocation(save_dest):
 def download(url,dest):
     print("Downloading....")
     YouTube(url).streams.first().download(dest)
+
+def convertMP3(url):
+    req = urllib2.Request(url)
+    response = urllib2.urlopen(req2)
 
 
 if __name__ == '__main__':
