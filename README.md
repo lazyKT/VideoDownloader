@@ -1,6 +1,7 @@
 # VideoDownloader
 Download the videos from YouTube
 
-**Current only YouTube videos can be downloaded**
+**Download youtube videos and convert the videos into mp3**
 
-**Tools used: pytube3,tkinter**
+**Tools used: pytube3,tkinter,youtube_dl**
+
