@@ -30,3 +30,6 @@
 # OS generated files #
 ######################
 *.db
+
+# Local Server
+local_server.py

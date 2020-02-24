@@ -14,6 +14,7 @@ def downloadMP3(url,dest):
 
     with youtube_dl.YoutubeDL(dwdl_opts) as ydl:
         ydl.download([url])
+        print()
 
 def downloadMP4(url,dest):
     dwdl_opts = {
@@ -24,14 +25,7 @@ def downloadMP4(url,dest):
         ydl.download([url])
 
 if __name__ == '__main__':
-    url = input('Enter the video url : ')
-    location = input('Enter the save destination : ')
-    f = input('[v]ideo or [a]udio : ')
-
-    if f == 'v':
-        downloadMP4(url,location)
-    elif f == 'a':
-        downloadMP3(url,location)
-    else:
-        print("Invalid Choice!!")
+    url = "https://www.youtube.com/watch?v=HJjdahujoMk"
+    location = r"C:\Users\9380-85615SG\Desktop\StudyMaterials\Programming\Python\test"
+    downloadMP3(url,location)
 

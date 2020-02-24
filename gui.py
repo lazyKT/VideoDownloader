@@ -118,7 +118,7 @@ class db():
         root.dest_text_box = Entry(self.home_frame,width='50', textvariable=self.download_path)
         root.dest_text_box.grid(row='4',column='0',padx='20',pady='10')
         browse_btn = Button(self.home_frame, text="Browse", command=self.browse,padx='5')
-        browse_btn.grid(row='5',column='1')
+        browse_btn.grid(row='4',column='1')
         vdo_btn = Button(self.home_frame, text="Video MP4", command=self.download_video, bg='#00FFEE', fg='#000')
         vdo_btn.grid(row='6', column='0')
         mp3_btn = Button(self.home_frame, text="Audio MP3", command=self.download_audio, bg="#00AADD", fg="#000")
@@ -127,7 +127,7 @@ class db():
 
     def browse(self):
         dwld_directory = filedialog.askdirectory(initialdir="/")
-        download_path.set(dwld_directory)
+        self.download_path.set(dwld_directory)
 
 
     def download_video(self):
@@ -139,7 +139,7 @@ class db():
         }
         with youtube_dl.YoutubeDL(dwdl_opts) as ydl:
             ydl.download([url])
-        des_lbl = Label(root, text="Download successful")
+        des_lbl = Label(self.home_frame, text="Download successful")
         des_lbl.grid(row='8',column='0')
 
 
@@ -160,6 +160,8 @@ class db():
         }
         with youtube_dl.YoutubeDL(dwdl_opts) as ydl:
             ydl.download([url])
+            print("title : "+ydl['title'])
+            print("file name :  " + dwdl_opts['outtmpl'])
         des_lbl = Label(self.home_frame, text="Download successful")
         des_lbl.grid(row='6',column='0')
 
