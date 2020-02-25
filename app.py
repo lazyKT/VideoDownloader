@@ -10,7 +10,6 @@ class playlist():
 
     def __init__(self, root):
         self.root = root
-        self.destination = os.path.join(os.getcwd(),r"Downloads/Audios")
         self.youtube_link = StringVar()
         self.views()
     
@@ -31,8 +30,7 @@ class playlist():
     
 
     def browse_from_local(self):
-        new_song = fd.askopenfile(initialdir="/", title="Choose mp3 from local", filetypes=[("MP3 Files", "*.mp3")])
-        new_song_location = new_song.name
+        new_song_location = fd.askopenfilename(initialdir="/", title="Choose mp3 from local", filetypes=[("MP3 Files", "*.mp3")])
         play_list_location = r"Downloads\Audios"
         shutil.copy2(new_song_location,play_list_location)
         msg.showinfo(title=None,message="Playlist Updated")
