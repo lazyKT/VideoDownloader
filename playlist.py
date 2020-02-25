@@ -1,6 +1,7 @@
 import os 
 import shutil
 import youtube_dl
+import pygame
 from tkinter import *
 from tkinter import filedialog as fd
 from tkinter import messagebox as msg
@@ -9,6 +10,7 @@ class playlist():
 
     def __init__(self, root):
         self.root = root
+        self.destination = os.path.join(os.getcwd(),r"Downloads/Audios")
         self.youtube_link = StringVar()
         self.views()
     
@@ -63,6 +65,25 @@ class playlist():
         self.playlist_frame.pack()
         self.refresh()
 
+
+    def locate_song_file(self,name):
+        current_dir = os.getcwd()
+        song_directory = os.path.join(current_dir+'\\Downloads\\Audios\\'+name)
+        song_file = open(song_directory,'r')
+        return song_file
+
+
+    def play(self):
+        pygame.mixer.init()
+        song = self.listbox.get(self.listbox.curselection())
+        pygame.mixer.music.load(self.locate_song_file(song))
+        pygame.mixer.music.play()
+
+
+    def pause(self):
+        pygame.mixer.music.pause()
+
+
     def views(self):
 
         self.playlist_frame = Frame(self.root)
@@ -77,6 +98,9 @@ class playlist():
             self.listbox.insert(END,p)  
         self.listbox.pack()
         #self.add_btn = Button(self.root, width = 10, text = " Add ", command=self.add).pack()
+
+        play_button = Button(root, width=10, text=" PLAY ", command=self.play).pack()
+        pause_button = Button(root, width=10, text=" PAUSE ", command=self.pause).pack()
 
         self.add_playlist_frame = Frame(self.root)
         add_lbl = Label(self.add_playlist_frame, width=300, text =" Add to playlist ").pack()

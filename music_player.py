@@ -12,6 +12,11 @@ def browse():
 def play():
     pygame.mixer.init()
     song_to_play = mp3.get()
+    example = r"C:\Usrs\9380-85615SG\Desktop\StudyMaterials\Programming\Python\Youtube_Downloader\Downloads\Audios\Numb (Official Video) - Linkin Park.mp3"
+    dir = os.path.join(os.getcwd(),r"Downloads\Audios")
+    f = open(dir+'\\'+os.listdir(dir)[2],'r')
+    print(type(f))
+    print(type(song_to_play))
     pygame.mixer.music.load(song_to_play)
     pygame.mixer.music.play()
 
