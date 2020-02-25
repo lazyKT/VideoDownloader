@@ -78,10 +78,23 @@ class playlist():
         song = self.listbox.get(self.listbox.curselection())
         pygame.mixer.music.load(self.locate_song_file(song))
         pygame.mixer.music.play()
-
+        self.stop_button.pack()
+        self.play_button.pack_forget()
+    
+    def stop(self):
+        pygame.mixer.music.stop()
+        # self.play_button.pack()
+        # self.stop_button.pack_forget()
 
     def pause(self):
         pygame.mixer.music.pause()
+        # self.resume_button.pack()
+        # self.pause_button.pack_forget()
+    
+    def resume(self):
+        pygame.mixer.music.unpause()
+        # self.pause_button.pack()   
+        # self.resume_button.pack_forget()     
 
 
     def views(self):
@@ -99,8 +112,11 @@ class playlist():
         self.listbox.pack()
         #self.add_btn = Button(self.root, width = 10, text = " Add ", command=self.add).pack()
 
-        play_button = Button(root, width=10, text=" PLAY ", command=self.play).pack()
-        pause_button = Button(root, width=10, text=" PAUSE ", command=self.pause).pack()
+        self.play_button = Button(self.root, width=10, text=" PLAY ", command=self.play).pack()
+        self.stop_button = Button(self.root, width=10, text=" STOP ", command=self.stop).pack()
+        self.pause_button = Button(self.root, width=10, text=" PAUSE ", command=self.pause).pack()
+        self.resume_button = Button(self.root, width=10, text=" RESUME ", command=self.resume).pack()
+
 
         self.add_playlist_frame = Frame(self.root)
         add_lbl = Label(self.add_playlist_frame, width=300, text =" Add to playlist ").pack()
@@ -118,5 +134,5 @@ if __name__ == '__main__':
     root = Tk()
     root.geometry("500x400")
     playlist(root)
-
+    root.title("YouTube2Mp3")
     root.mainloop()
