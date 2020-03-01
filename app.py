@@ -25,7 +25,7 @@ class playlist():
     def add(self):
         self.playlist_frame.pack_forget()
         self.listbox.pack_forget()
-        #self.add_btn.pack_forget()
+        self.player_frame.pack_forget()
         self.add_playlist_frame.pack()
     
 
@@ -61,8 +61,16 @@ class playlist():
     def back(self):
         self.add_playlist_frame.pack_forget()
         self.playlist_frame.pack()
+        self.listbox.pack()
+        self.player_frame.pack()
         self.refresh()
 
+    def back_youtube(self):
+        self.add_from_youtube_frame.pack_forget()
+        self.playlist_frame.pack()
+        self.listbox.pack()
+        self.player_frame.pack()
+        self.refresh()
 
     def locate_song_file(self,name):
         current_dir = os.getcwd()
@@ -76,8 +84,7 @@ class playlist():
         song = self.listbox.get(self.listbox.curselection())
         pygame.mixer.music.load(self.locate_song_file(song))
         pygame.mixer.music.play()
-        self.stop_button.pack()
-        self.play_button.pack_forget()
+        #self.play_button.grid_forget()
     
     def stop(self):
         pygame.mixer.music.stop()
@@ -97,10 +104,10 @@ class playlist():
 
     def views(self):
 
-        self.playlist_frame = Frame(self.root)
-        lbl = Label(self.playlist_frame, width = 500,text = " Play List ").pack()
-        btn = Button(self.playlist_frame, width = 10, text = "Refresh", command=self.refresh).pack()
-        add_btn = Button(self.playlist_frame, width = 10, text = " Add to playlist ", command=self.add).pack()
+        self.playlist_frame = Frame(self.root, padx=10, pady=10)
+        #Label(self.playlist_frame, width = 500,text = " Play List ").pack()
+        Button(self.playlist_frame, width = 15, text = "Refresh", command=self.refresh).grid(row=0,column=0)
+        Button(self.playlist_frame, width = 15, text = " Add to playlist ", command=self.add).grid(row=0,column=1)
         self.playlist_frame.pack()
 
         self.listbox = Listbox(self.root, width = 400, bd = "1")
@@ -110,10 +117,12 @@ class playlist():
         self.listbox.pack()
         #self.add_btn = Button(self.root, width = 10, text = " Add ", command=self.add).pack()
 
-        self.play_button = Button(self.root, width=10, text=" PLAY ", command=self.play).pack()
-        self.stop_button = Button(self.root, width=10, text=" STOP ", command=self.stop).pack()
-        self.pause_button = Button(self.root, width=10, text=" PAUSE ", command=self.pause).pack()
-        self.resume_button = Button(self.root, width=10, text=" RESUME ", command=self.resume).pack()
+        self.player_frame = Frame(self.root, padx=10, pady=10)
+        Button(self.player_frame, text = "  Play  ", command=self.play).grid(row=2) 
+        Button(self.player_frame, text = "  Resume  ", command=self.resume).grid(row = 2, column = 1)
+        Button(self.player_frame, text = "  Pause  ", command=self.pause).grid(row = 2, column = 2)
+        Button(self.player_frame, text = "  Stop  ", command=self.stop).grid(row = 2, column = 3)
+        self.player_frame.pack()
 
 
         self.add_playlist_frame = Frame(self.root)
@@ -124,9 +133,10 @@ class playlist():
         back_btn = Button(self.add_playlist_frame, width=50, text=" Back to PlayList", command=self.back).pack()
 
         self.add_from_youtube_frame = Frame(self.root)
-        url_lbl = Label(self.add_from_youtube_frame, text="Enter the video url : ").grid(row=0,sticky=W)
-        url_entry = Entry(self.add_from_youtube_frame, width=70, textvariable=self.youtube_link).grid(row=0,column=1)
-        download_btn = Button(self.add_from_youtube_frame, width=10, text=" Download ", command=self.save_from_youtube).grid(row=1)
+        Label(self.add_from_youtube_frame, text="Enter the video url : ").grid(row=0,sticky=W)
+        Entry(self.add_from_youtube_frame, width=70, textvariable=self.youtube_link).grid(row=0,column=1)
+        Button(self.add_from_youtube_frame, width=10, text=" Download ", command=self.save_from_youtube).grid(row=1)
+        Button(self.add_from_youtube_frame, width=10, text=" Back ", command=self.back_youtube).grid(row=1,column=1)
 
 if __name__ == '__main__':
     root = Tk()

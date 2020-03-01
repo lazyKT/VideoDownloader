@@ -62,7 +62,7 @@ class db():
         self.head["text"] = "  LOG IN  "
         self.login_frame.pack()
 
-    #Call sing up frame
+    # Call sing up frame
     def signup(self):
         self.new_username.set("")
         self.new_password.set("")
@@ -95,7 +95,7 @@ class db():
         Entry(self.signup_frame, textvariable = self.new_password, bd = 8).grid(row=1, column = 1, sticky = E)
         Button(self.signup_frame, text = "  Back to Login  ", command = self.log).grid(row=2) 
         Button(self.signup_frame, text = "  Sign Up  ", command = self.createUser).grid(row = 2, column = 1)
-        #self.signup_frame.pack()
+        self.signup_frame.pack()
 
 if __name__ == "__main__":
     root = Tk()
